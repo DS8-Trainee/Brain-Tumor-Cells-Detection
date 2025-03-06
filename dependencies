@@ -11,3 +11,4 @@ joblib
 reportlab
 torch
 opencv-python-headless==4.8.0.74
+git Lfs pull
