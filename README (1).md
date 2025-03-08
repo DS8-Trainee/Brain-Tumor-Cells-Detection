@@ -131,7 +131,7 @@ Valid_model = YOLO('/content/runs/detect/train/weights/best.pt')\
 **To save this model download this model **\
 # Evaluating the model on the validset
 metrics = Valid_model.val(split = 'val')
-![]Validation dataset inference](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
+![Validation dataset inference](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
 # final results
 print("precision(B): ", metrics.results_dict["metrics/precision(B)"])\
 print("metrics/recall(B): ", metrics.results_dict["metrics/recall(B)"])\
@@ -263,7 +263,7 @@ if len(image_files) > 0:
     **Step 17**
 **Step-17 Deployment of app on Hugging face.**
     Go to https://huggingface.co/
-    ![Hugging Face](![image]https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/Huggingface_logo.svg
+    ![Hugging Face](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/Huggingface_logo.svg)
     Go to Spaces/
     Create new space/
 **1-Add requirements.txt file**
