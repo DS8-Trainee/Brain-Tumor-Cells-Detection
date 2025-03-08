@@ -18,7 +18,6 @@ The dataset has been taken from Roboflow \
             Blur: Up to 1px\
             Noise: Up to 1.49% of pixels\
             Bounding Box: Flip: Horizontal\
-![image](https://github.com/user-attachments/assets/aaac2cbb-3aab-46d5-91c0-5b0c84161222)\
            Click the download dataset.The dataset will be downloaded in downloads.\
 **2nd Step** Go to colab (https://colab.research.google.com/#create=true)\
 **3rd Step** Upload data set to google drive \
