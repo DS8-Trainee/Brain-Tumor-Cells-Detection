@@ -1,28 +1,28 @@
 # Brain-Tumor-Cells-Detection
 This project will detect tumor in brain MRI scans to help assist the radiologist/expert in detecting tumor accurately and within less time.\
-*1st Step: Collection of dataset*
+**1st Step: Collection of dataset**
 The dataset has been taken from Roboflow \
             Go to Roboflow Universe or follow the link\
             ![Roboflow](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/roboflow_logo.png) \
             (Link:https://universe.roboflow.com/zaky-indra-w86c4/brain-tumor-gsh0d/dataset/1).\\
             \
 **Particulars of dataset**\
-                        MRI Scans ~3073\
-                        Train:2766 (90%)\
-                        Valid:184 (6%)\
-                        Test:123 (4%)\
-                        Preprocesing :Auto-Orient: Applied\
-                        Resize: Stretch to 640x640\
-                        Output per training example: 3\
-                        Grayscale: Apply to 15% of images\
-                        Blur: Up to 1px\
-                        Noise: Up to 1.49% of pixels\
-                        Bounding Box: Flip: Horizontal\
+                        - MRI Scans ~3073\
+                        - Train:2766 (90%)\
+                        - Valid:184 (6%)\
+                        - Test:123 (4%)\
+                        - Preprocesing :Auto-Orient: Applied\
+                        - Resize: Stretch to 640x640\
+                        - Output per training example: 3\
+                        - Grayscale: Apply to 15% of images\
+                        - Blur: Up to 1px\
+                        - Noise: Up to 1.49% of pixels\
+                        - Bounding Box: Flip: Horizontal\
            Click the download dataset.The dataset will be downloaded in downloads.\
-*2nd Step: Setting the Environment*
-Go to colab (https://colab.research.google.com/#create=true)\
-**3rd Step** Upload data set to google drive \
-**4th step** Import dataset mount drive using \
+**2nd Step: Setting the Environment**
+                        - 1-Go to colab (https://colab.research.google.com/#create=true)\
+                        - 2- Upload data set to google drive \
+                        - 3- Import dataset mount drive using \
 **5th step** unzip data using following code: import zipfile # This line imports the zipfile module\
               zip_path = '/content/path'\
               extract_path = 'path'\
