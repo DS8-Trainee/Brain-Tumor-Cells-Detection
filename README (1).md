@@ -80,7 +80,7 @@ Few metrics are\
             F1 curve\
             Precision and confidence score\
             Recall and confidence score\
-            ![Recall for model](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)\
+            ![Recall for model](\
 **Step 13** The results of the model are saved in form of csv file That can be visualize as\
 Firstly reading dataframe\
 Result_Train_model12 = pd.read_csv('/content/runs/detect/train/results.csv')\
@@ -131,7 +131,7 @@ Valid_model = YOLO('/content/runs/detect/train/weights/best.pt')\
 **To save this model download this model **\
 # Evaluating the model on the validset
 metrics = Valid_model.val(split = 'val')
-
+![]Validation dataset inference](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
 # final results
 print("precision(B): ", metrics.results_dict["metrics/precision(B)"])\
 print("metrics/recall(B): ", metrics.results_dict["metrics/recall(B)"])\
@@ -263,7 +263,7 @@ if len(image_files) > 0:
     **Step 17**
 **Step-17 Deployment of app on Hugging face.**
     Go to https://huggingface.co/
-    [![Hugging Face](https://path-to-hugging-face-icon.png)](https://huggingface.co)
+    ![Hugging Face](![image]https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/Huggingface_logo.svg
     Go to Spaces/
     Create new space/
 **1-Add requirements.txt file**
@@ -407,13 +407,13 @@ Launch the interface\
 Go to add file> upload file> upload the mode"best.pt 
 Now go to app will build and restart and take few moments. 
 The interface would be like this 
-![image](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/image.png)
-**Methd of Use**
-            The model has been deployed on huggingface space.
-            Go to (https://huggingface.co/stmuntahaa)
-            ![image]
-            [stmuntahaa/Brain_Tumor_Detection](https://huggingface.co/stmuntahaa).
+![image](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/image.png)\
+*Methd of Use*
+            The model has been deployed on huggingface space.\
+            Go to (https://huggingface.co/stmuntahaa)\
+            [stmuntahaa/Brain_Tumor_Detection](https://huggingface.co/stmuntahaa).\
             
-            1-Deployed app's UI asks user to upload MRI scan and patient particulars (Patient name, Gender, Age), and prompts to click 
+            *1*-Deployed app's UI asks user to upload MRI scan and patient particulars (Patient name, Gender, Age), and prompts to click 
             the Submit button.
-            2-The app produces results on UI (Output 0) along with a pdf report, that is downloadable. The report contains the necessary information on the patient's particulars and the result of the MRI scan. The pdf report is downloaded to local Download folder of your device.
+            *2*-The app produces results on UI (Output 0) along with a pdf report, that is downloadable. The report contains the                       necessary information on the patient's particulars and the result of the MRI scan.\
+            The pdf report is downloaded to local Download folder of your device.
