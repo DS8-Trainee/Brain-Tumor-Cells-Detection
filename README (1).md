@@ -287,7 +287,7 @@ os.system("git lfs pull")\
 import os\
 os.system('pip install pillow')\
 from PIL import Image\
-# Your code here\
+# Your code here
 import ultralytics\
 print(f"Ultralytics version: {ultralytics.__version__}")\
 from ultralytics import YOLO\
@@ -399,7 +399,7 @@ iface = gr.Interface(\
     description="Upload MRI scan to detect brain tumors.",\
 )\
 
-# Launch the interface\
+# Launch the interface
 iface.launch(share=True) \
 3-step upload model
 Go to add file> upload file> upload the mode"best.pt 
