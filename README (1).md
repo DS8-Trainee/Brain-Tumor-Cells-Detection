@@ -41,14 +41,13 @@ The dataset has been taken from Roboflow \
               - import ray\
               - print(ray.__version__)\
             
-**5th step** unzip data using following code: import zipfile # This line imports the zipfile module\
+**3th step: unzip data using following code**\
+import zipfile # This line imports the zipfile module\
               zip_path = '/content/path'\
               extract_path = 'path'\
               with zipfile.ZipFile(zip_path, 'r') as zip_ref:\
-                  zip_ref.extractall(extract_path)\
-**6th step** setting up environment\
-              
-  **7th step**
+                  zip_ref.extractall(extract_path)\            
+**4th step:Covert images from grey to rgb scale**
               Covert images from grey to rgb scale using defining a function 
               def convert_images_to_rgb(directory):
                   for root, _, files in os.walk(directory):
@@ -62,7 +61,7 @@ The dataset has been taken from Roboflow \
                               print(f"Converted {file} to RGB")
                       except Exception as e:\
                               print(f"Warning: Could not convert {file} to RGB. Error: {e}")
- **8th step** Ceate Image directory and display images in dataset to get verification\
+ **5th step: Ceate Image directory and display images in dataset to get verification**\
             (Write the script in colab like this)\
             image_directory = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8/train/images'\
             num_sample = 9\
@@ -77,39 +76,39 @@ The dataset has been taken from Roboflow \
               plt.tight_layout()\
             plt.show()\
 ![Images verification](https://github.com/user-attachments/assets/2ca23625-454d-4ed1-8e04-2444f979a8ab)\
-**Step 9** # shape of single image\
+**Step 6: Check the shape of single image**\
             image_dr = os.path.join(image_directory,random_images[0])
             image_dr
-**Step 10** Download YOLOv8 and run Inference on a random image\
+**Step 7: Download YOLOv8 and run Inference on a random image**\
                     from ultralytics import YOLO\
              Write scrite in cloab\
              yolo_model = YOLO('yolov8n.pt')\
                  (To check with inference write this scipte in colab)\
                  !yolo task=detect mode=predict model=yolov8n.pt source='/content/drive/MyDrive/Roboflow_Brain_Tumor/brain             tumor.v1i.yolov8/train/images/y424_jpg.rf.35c1baa4ae87ff74e91ecaf4a0c21537.jpg'\
-**Step 11** Train model on custom dataset \
+**Step 8: Train model on custom dataset** \
             Model has been given epoch 16, batch size=-1, optimiser=auto\
             use following script\
-Result_Final_model2 = yolo_model.train(data="/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8/data.yaml",epochs = 16,batch =-1, optimizer = 'auto')\
-**Step 12** Check Model Accuracy\
+Result_Final_model = yolo_model.train(data="/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8/data.yaml",epochs = 16,batch =-1, optimizer = 'auto')\
+***Check Model Accuracy***
 Few metrics are\
             confusion matrix\
             F1 curve\
             Precision and confidence score\
             Recall and confidence score\
             ![Recall for model](\
-**Step 13** The results of the model are saved in form of csv file That can be visualize as\
-Firstly reading dataframe\
-Result_Train_model12 = pd.read_csv('/content/runs/detect/train/results.csv')\
-Afterwards displaying only 10 last rows of that\
-Result_Train_model12.tail(10)\
-Also wrinting following script\
- Read the results.csv file as a pandas dataframe\
-Result_Train_model.columns = Result_Train_model.columns.str.strip()
-
-# Create subplots
-fig, axs = plt.subplots(nrows=5, ncols=2, figsize=(15, 15))\
-
-# Plot the columns using seaborn
+            ![Receision]()
+            ![F1]()
+            The results of the model are saved in form of csv file That can be visualize as\
+             **Firstly reading dataframe**\
+            - Result_Train_model = pd.read_csv('/content/runs/detect/train/results.csv')\
+             **Afterwards displaying only 10 last rows of that**\
+            - Result_Train_model12.tail(10)\
+              **Also writing following script**\
+             - Read the results.csv file as a pandas dataframe\
+             - Result_Train_model.columns = Result_Train_model.columns.str.strip()
+              ***Create subplots***\
+            fig, axs = plt.subplots(nrows=5, ncols=2, figsize=(15, 15))\
+***Plot the columns using seaborn***
 sns.lineplot(x='epoch', y='train/box_loss', data=Result_Train_model, ax=axs[0,0])\
 sns.lineplot(x='epoch', y='train/cls_loss', data=Result_Train_model, ax=axs[0,1])\
 sns.lineplot(x='epoch', y='train/dfl_loss', data=Result_Train_model, ax=axs[1,0])\
@@ -121,7 +120,7 @@ sns.lineplot(x='epoch', y='val/box_loss', data=Result_Train_model, ax=axs[3,1])\
 sns.lineplot(x='epoch', y='val/cls_loss', data=Result_Train_model, ax=axs[4,0])\
 sns.lineplot(x='epoch', y='val/dfl_loss', data=Result_Train_model, ax=axs[4,1])\
 
-# Set titles and axis labels for each subplot
+***Set titles and axis labels for each subplot***
 axs[0,0].set(title='Train Box Loss')\
 axs[0,1].set(title='Train Class Loss')\
 axs[1,0].set(title='Train DFL Loss')\
@@ -140,42 +139,25 @@ plt.tight_layout()\
 plt.show()\
 This will produce following results\
 ![Results]()\
-**Step 14**
+**Step 9: Uploading best model**
 Yolo automatically stores best performing model in train/weights/best.pt. So, utilizing that model evaluation on valid set was done using following script. and results may e printed\
-# Loading the best performing model
 Valid_model = YOLO('/content/runs/detect/train/weights/best.pt')\
 **To save this model download this model **\
-# Evaluating the model on the validset
-metrics = Valid_model.val(split = 'val')
-![Validation dataset inference](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
-# final results
-print("precision(B): ", metrics.results_dict["metrics/precision(B)"])\
-print("metrics/recall(B): ", metrics.results_dict["metrics/recall(B)"])\
-print("metrics/mAP50(B): ", metrics.results_dict["metrics/mAP50(B)"])\
-print("metrics/mAP50-95(B): ", metrics.results_dict["metrics/mAP50-95(B)"])\
-Model produce following results\
-Results saved to runs/detect/val\
-precision(B):  0.9323591286180969\
-metrics/recall(B):  0.9189348599890331\
-metrics/mAP50(B):  0.9668363585639872\
-metrics/mAP50-95(B):  0.7805349340372879\
-**Step 15**
-# Normalization function
+**Evaluating the model on the validset**
+***Normalization function***
 def normalize_image(image):
     return image / 255.0
-
-# Image resizing function
+***Image resizing function***
 def resize_image(image, size=(640, 640)):
     return cv2.resize(image, size)
-
-# Path to test images
+***Path to test images***
 dataset_path = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8'  # Place your dataset path here
 valid_images_path = os.path.join(dataset_path, 'valid', 'images')
 
-# List of all jpg images in the directory
+***List of all jpg images in the directory***
 image_files = [file for file in os.listdir(valid_images_path) if file.endswith('.jpg')]
 
-# Check if there are images in the directory
+***Check if there are images in the directory***
 if len(image_files) > 0:
     # Select 9 images at equal intervals
     num_images = len(image_files)
@@ -216,25 +198,37 @@ if len(image_files) > 0:
 
     plt.tight_layout()
     plt.show()
-    ![Valid set Images](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
-
-**Step 16**
-# Normalization function
+![Valid set Images](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
+metrics = Valid_model.val(split = 'val')
+![Validation dataset inference](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
+***final results***
+print("precision(B): ", metrics.results_dict["metrics/precision(B)"])\
+print("metrics/recall(B): ", metrics.results_dict["metrics/recall(B)"])\
+print("metrics/mAP50(B): ", metrics.results_dict["metrics/mAP50(B)"])\
+print("metrics/mAP50-95(B): ", metrics.results_dict["metrics/mAP50-95(B)"])\
+Model produce following results\
+Results saved to runs/detect/val\
+precision(B):  0.9323591286180969\
+metrics/recall(B):  0.9189348599890331\
+metrics/mAP50(B):  0.9668363585639872\
+metrics/mAP50-95(B):  0.7805349340372879\
+**Step 10: Inference on unseen data**
+***Normalization function***
 def normalize_image(image):
     return image / 255.0
 
-# Image resizing function
+***Image resizing function***
 def resize_image(image, size=(640, 640)):
     return cv2.resize(image, size)
 
-# Path to test images
+***Path to test images***
 dataset_path = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8'  # Place your dataset path here
 valid_images_path = os.path.join(dataset_path, 'test', 'images')
 
-# List of all jpg images in the directory
+***List of all jpg images in the directory***
 image_files = [file for file in os.listdir(valid_images_path) if file.endswith('.jpg')]
 
-# Check if there are images in the directory
+***Check if there are images in the directory***
 if len(image_files) > 0:
     # Select 9 images at equal intervals
     num_images = len(image_files)
@@ -277,31 +271,31 @@ if len(image_files) > 0:
     plt.show()
     ![Test set Images](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
     **Step 17**
-**Step-17 Deployment of app on Hugging face.**
-    Go to https://huggingface.co/
+**Step-11: Deployment of app on Hugging face**\
+   -  Go to https://huggingface.co/
     ![Hugging Face](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/Huggingface_logo.svg)
-    Go to Spaces/
-    Create new space/
+    - Go to Spaces/
+    - Create new space/
 **1-Add requirements.txt file**
     Add following libraries there\
-            pandas\
-            numpy\
-            gradio \
-            ultralytics\
-            YOLO\
-            ray==2.32.0\
-            reportlab\
-            Pillow==9.5.0\
-            Ultralytics\
-            joblib\
-            reportlab\
-            torchvision\
-            torch\
-            opencv-python-headless==4.8.0.74\
+           - numpy
+           - pandas
+           -  gradio \
+           -  ultralytics\
+           -  YOLO\
+           - ray==2.32.0\
+           -  reportlab\
+           -  Pillow==9.5.0\
+           -  Ultralytics\
+           -  joblib\
+            - reportlab\
+            - torchvision\
+            - torch\
+            - opencv-python-headless==4.8.0.74\
             
 **2- Add app.py file**
-    To create user interface in gradio write following script in app.py file\
-    import os\
+To create user interface in gradio write following script in app.py file\
+import os\
 os.system("git lfs pull")\
 import os\
 os.system('pip install pillow')\
@@ -424,7 +418,7 @@ Go to add file> upload file> upload the mode"best.pt
 Now go to app will build and restart and take few moments. 
 The interface would be like this 
 ![image](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/image.png)\
-*Methd of Use*
+# Ste:12; Methd of Use
             The model has been deployed on huggingface space.\
             Go to (https://huggingface.co/stmuntahaa)\
             [stmuntahaa/Brain_Tumor_Detection](https://huggingface.co/stmuntahaa).\
