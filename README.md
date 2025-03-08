@@ -79,6 +79,7 @@ Few metrics are\
             F1 curve\
             Precision and confidence score\
             Recall and confidence score\
+            ![Recall for model](
 
 
 
