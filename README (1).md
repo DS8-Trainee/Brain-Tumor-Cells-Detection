@@ -273,10 +273,10 @@ if len(image_files) > 0:
     **Step 17**
 **Step-11: Deployment of app on Hugging face**\
    -  Go to https://huggingface.co/
-    ![Hugging Face](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/Huggingface_logo.svg)
+     ![Hugging Face](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/Huggingface_logo.svg)\
     - Go to Spaces/
     - Create new space/
-**1-Add requirements.txt file**
+**1-Add requirements.txt file**\
     Add following libraries there\
            - numpy
            - pandas
@@ -293,7 +293,7 @@ if len(image_files) > 0:
             - torch\
             - opencv-python-headless==4.8.0.74\
             
-**2- Add app.py file**
+**2- Add app.py file**\
 To create user interface in gradio write following script in app.py file\
 import os\
 os.system("git lfs pull")\
