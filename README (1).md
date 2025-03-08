@@ -1,10 +1,24 @@
 # Brain-Tumor-Cells-Detection
 This project will detect tumor in brain MRI scans to help assist the radiologist/expert in detecting tumor accurately and within less time.\
-**1st Step:** The dataset has been taken from Roboflow (having one class:tumor)\
+*1st Step: Collection of dataset*
+The dataset has been taken from Roboflow \
             Go to Roboflow Universe or follow the link\
             ![Roboflow](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/roboflow_logo.png)\
-            (Link:https://universe.roboflow.com/zaky-indra-w86c4/brain-tumor-gsh0d/dataset/1).
-              Click the download dataset.The dataset will be downloaded in downloads.\
+            (Link:https://universe.roboflow.com/zaky-indra-w86c4/brain-tumor-gsh0d/dataset/1).\
+          ** Perticulars of dataset**
+            MRI Scans ~3073\
+            Train:2766 (90%)\
+            Valid:184 (6%)\
+            Test:123 (4%)\
+            Preprocesing :Auto-Orient: Applied\
+            Resize: Stretch to 640x640\
+            Output per training example: 3\
+            Grayscale: Apply to 15% of images\
+            Blur: Up to 1px\
+            Noise: Up to 1.49% of pixels\
+            Bounding Box: Flip: Horizontal\
+![image](https://github.com/user-attachments/assets/aaac2cbb-3aab-46d5-91c0-5b0c84161222)\
+           Click the download dataset.The dataset will be downloaded in downloads.\
 **2nd Step** Go to colab (https://colab.research.google.com/#create=true)\
 **3rd Step** Upload data set to google drive \
 **4th step** Import dataset mount drive using \
