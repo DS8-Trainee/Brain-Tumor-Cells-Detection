@@ -28,6 +28,9 @@ This project will detect tumor in brain MRI scans to help assist the radiologist
               from PIL import Image\
               import os\
               from PIL import Image\
+              import ray\
+              print(ray.__version__)\
+              All major libraries and packages have also been listed in the dependencies file.\
   **7th step**
               Covert images from grey to rgb scale using defining a function 
               def convert_images_to_rgb(directory):
@@ -40,33 +43,46 @@ This project will detect tumor in brain MRI scans to help assist the radiologist
                               img_rgb = img.convert('RGB')
                               img_rgb.save(image_path)
                               print(f"Converted {file} to RGB")
-                      except Exception as e:
+                      except Exception as e:\
                               print(f"Warning: Could not convert {file} to RGB. Error: {e}")
- ** 8th step** Create Image directory and display images in dataset to get verification\
-(Write the script in colab like this)
-image_directory = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8/train/images'\
-num_sample = 9\
-image_files = os.listdir(image_directory)\
-random_images = random.sample(image_files,num_sample)\
-fig ,axes = plt.subplots(3,3,figsize=(11,11))\
-for i in range(num_sample):\
-  ax = axes[i//3,i%3]\
-  ax.imshow(mpimg.imread(os.path.join(image_directory,random_images[i])))\
-  ax.axis('off')\
-  ax.set_title(f'Image {i}')\
-  plt.tight_layout()\
-plt.show()\
-![Data Verification](https://github.com/user-attachments/assets/9beb1a1a-52e1-41e9-9796-af5cfe5b553e)!\
+ **8th step** Ceate Image directory and display images in dataset to get verification\
+            (Write the script in colab like this)\
+            image_directory = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8/train/images'\
+            num_sample = 9\
+            image_files = os.listdir(image_directory)\
+            random_images = random.sample(image_files,num_sample)\
+            fig ,axes = plt.subplots(3,3,figsize=(11,11))\
+            for i in range(num_sample):\
+              ax = axes[i//3,i%3]\
+              ax.imshow(mpimg.imread(os.path.join(image_directory,random_images[i])))\
+              ax.axis('off')\
+              ax.set_title(f'Image {i}')\
+              plt.tight_layout()\
+            plt.show()\
 ![Images verification](https://github.com/user-attachments/assets/2ca23625-454d-4ed1-8e04-2444f979a8ab)\
 **Step 9** # shape of single image\
-image_dr = os.path.join(image_directory,random_images[0])
-image_dr
+            image_dr = os.path.join(image_directory,random_images[0])
+            image_dr
 **Step 10** Download YOLOv8 and run Inference on a random image\
-                        from ultralytics import YOLO
+                    from ultralytics import YOLO\
+             Write scrite in cloab\
+             yolo_model = YOLO('yolov8n.pt')\
+                 (To check with inference write this scipte in colab)\
+                 !yolo task=detect mode=predict model=yolov8n.pt source='/content/drive/MyDrive/Roboflow_Brain_Tumor/brain             tumor.v1i.yolov8/train/images/y424_jpg.rf.35c1baa4ae87ff74e91ecaf4a0c21537.jpg'\
+**Step 11** Train model on custom dataset \
+            Model has been given epoch 16, batch size=-1, optimiser=auto\
+            use following script\
+Result_Final_model2 = yolo_model.train(data="/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8/data.yaml",epochs = 16,batch =-1, optimizer = 'auto')\
+**Step 12** Check Model Accuracy\
+Few metrics are\
+            confusion matrix\
+            F1 curve\
+            Precision and confidence score\
+            Recall and confidence score\
 
-              It uses Yolov8n model
-All major libraries and packages have also been listed in the dependencies file.
-Model has been given epoch 16, batch size=-1, optimiser=auto
+
+
+
 The model has been checked on unseen data from Hayatabad Hospital, Peshawar. It is giving fairly good results.
 After training the model, it has been saved and Gradio-based UI was made.
 The model has been deployed on huggingface space "stmuntahaa/Brain_Tumor_Detection".
