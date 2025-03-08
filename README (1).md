@@ -303,7 +303,6 @@ os.system("git lfs pull")\
 import os\
 os.system('pip install pillow')\
 from PIL import Image\
-# Your code here
 import ultralytics\
 print(f"Ultralytics version: {ultralytics.__version__}")\
 from ultralytics import YOLO\
@@ -319,7 +318,7 @@ import joblib\
 from reportlab.lib.pagesizes import letter\
 from reportlab.pdfgen import canvas\
 
-# Load the model ('best.pt' )
+**Load the model ('best.pt' )**\
 try:\
     model = YOLO('best.pt')\
 except FileNotFoundError:\
@@ -401,7 +400,7 @@ def predict_brain_tumor(image, name, gender, age):\
     except Exception as e:\
         logging.error(f"Prediction error: {e}")\
         return f"Prediction error: {e}", None\
-# Create the Gradio interface\
+**Create the Gradio interface**\
 iface = gr.Interface(\
     fn=predict_brain_tumor,\
     inputs=[\
