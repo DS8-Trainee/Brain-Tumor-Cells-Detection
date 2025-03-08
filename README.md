@@ -1,4 +1,4 @@
-# Brain-Tumor-Cells-Detection\
+# Brain-Tumor-Cells-Detection
 This project will detect tumor in brain MRI scans to help assist the radiologist/expert in detecting tumor accurately and within less time.\
 **1st Step:** The dataset has been taken from Roboflow (having one class:tumor)\
             Go to Roboflow Universe or follow the link\
@@ -79,7 +79,7 @@ Few metrics are\
             F1 curve\
             Precision and confidence score\
             Recall and confidence score\
-            ![Recall for model](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
+            ![Recall for model](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)\
 **Step 13** The results of the model are saved in form of csv file That can be visualize as\
 Firstly reading dataframe\
 Result_Train_model12 = pd.read_csv('/content/runs/detect/train/results.csv')\
@@ -122,8 +122,8 @@ plt.subplots_adjust(top=0.8)\
 plt.tight_layout()\
 plt.show()\
 This will produce following results\
-![Results]()
-**Step 13**
+![Results]()\
+**Step 14**
 Yolo automatically stores best performing model in train/weights/best.pt. So, utilizing that model evaluation on valid set was done using following script. and results may e printed\
 # Loading the best performing model\
 Valid_model = YOLO('/content/runs/detect/train/weights/best.pt')\
@@ -142,23 +142,23 @@ precision(B):  0.9323591286180969\
 metrics/recall(B):  0.9189348599890331\
 metrics/mAP50(B):  0.9668363585639872\
 metrics/mAP50-95(B):  0.7805349340372879\
-**Step 14**
-# Normalization function\
+**Step 15**
+# Normalization function
 def normalize_image(image):\
     return image / 255.0\
 
-# Image resizing function\
+# Image resizing function
 def resize_image(image, size=(640, 640)):\
     return cv2.resize(image, size)\
 
-# Path to test images\
+# Path to test images
 dataset_path = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8'  # Place your dataset path here\
 valid_images_path = os.path.join(dataset_path, 'valid', 'images')\
 
-# List of all jpg images in the directory\
+# List of all jpg images in the directory
 image_files = [file for file in os.listdir(valid_images_path) if file.endswith('.jpg')]\
 
-# Check if there are images in the directory\
+# Check if there are images in the directory
 if len(image_files) > 0:\
     # Select 9 images at equal intervals\
     num_images = len(image_files)\
@@ -201,23 +201,23 @@ if len(image_files) > 0:\
     plt.show()\
     ![Valid set Images]()
 
-    **Step 14**
-# Normalization function\
+    **Step 16**
+# Normalization function
 def normalize_image(image):\
     return image / 255.0\
 
-# Image resizing function\
+# Image resizing function
 def resize_image(image, size=(640, 640)):\
     return cv2.resize(image, size)\
 
-# Path to test images\
+# Path to test images
 dataset_path = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8'  # Place your dataset path here\
 valid_images_path = os.path.join(dataset_path, 'test', 'images')\
 
-# List of all jpg images in the directory\
+# List of all jpg images in the directory
 image_files = [file for file in os.listdir(valid_images_path) if file.endswith('.jpg')]\
 
-# Check if there are images in the directory\
+# Check if there are images in the directory
 if len(image_files) > 0:\
     # Select 9 images at equal intervals\
     num_images = len(image_files)\
@@ -258,7 +258,7 @@ if len(image_files) > 0:\
 
     plt.tight_layout()\
     plt.show()\
-    ![Test set Images]()
+    ![Test set Images](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
     
 
 
