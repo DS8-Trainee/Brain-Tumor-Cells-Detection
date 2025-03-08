@@ -20,33 +20,34 @@ The dataset has been taken from Roboflow \
                         - Bounding Box: Flip: Horizontal\
            Click the download dataset.The dataset will be downloaded in downloads.\
 **2nd Step: Setting the Environment**\
-                        - 1-Go to colab (https://colab.research.google.com/#create=true)\
-                        - 2- Upload data set to google drive \
-                        - 3- Import dataset mount drive using \
+               -  Go to colab (https://colab.research.google.com/#create=true)\
+               -  Upload data set to google drive \
+               -  Import dataset mount drive using \
+ **All major libraries and packages have also been listed in the dependencies file.**\
+              - import pandas as pd\
+              - import seaborn as sns\
+              - import matplotlib.pyplot as plt\
+              - import numpy as np\
+              - import os,random\
+              - import matplotlib.pyplot as plt\
+              - import matplotlib.image as mpimg\
+              - import cv2\
+              - import torch\
+              - !pip install Pillow\
+             -  import os\
+             -  from PIL import Image\
+              - import os\
+              - from PIL import Image\
+              - import ray\
+              - print(ray.__version__)\
+            
 **5th step** unzip data using following code: import zipfile # This line imports the zipfile module\
               zip_path = '/content/path'\
               extract_path = 'path'\
               with zipfile.ZipFile(zip_path, 'r') as zip_ref:\
                   zip_ref.extractall(extract_path)\
 **6th step** setting up environment\
-              Import necessary libraries \
-              import pandas as pd\
-              import seaborn as sns\
-              import matplotlib.pyplot as plt\
-              import numpy as np\
-              import os,random\
-              import matplotlib.pyplot as plt\
-              import matplotlib.image as mpimg\
-              import cv2\
-              import torch\
-              !pip install Pillow\
-              import os\
-              from PIL import Image\
-              import os\
-              from PIL import Image\
-              import ray\
-              print(ray.__version__)\
-              All major libraries and packages have also been listed in the dependencies file.\
+              
   **7th step**
               Covert images from grey to rgb scale using defining a function 
               def convert_images_to_rgb(directory):
