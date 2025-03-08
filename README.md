@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/9beb1a1a-52e1-41e9-9796-af5cfe5b553e)![image](https://github.com/user-attachments/assets/2ca23625-454d-4ed1-8e04-2444f979a8ab)# Brain-Tumor-Cells-Detection
+# Brain-Tumor-Cells-Detection
 This project will detect tumor in brain MRI scans to help assist the radiologist/expert in detecting tumor accurately and within less time.
 **1st Step:** The dataset has been taken from Roboflow (having one class:tumor)
             Go to Roboflow Universe or follow the link
@@ -56,7 +56,7 @@ for i in range(num_sample):
   ax.set_title(f'Image {i}')
   plt.tight_layout()
 plt.show()
-
+![Data Verification](https://github.com/user-attachments/assets/9beb1a1a-52e1-41e9-9796-af5cfe5b553e)!
 
 
 
