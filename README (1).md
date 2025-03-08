@@ -78,7 +78,7 @@ import zipfile # This line imports the zipfile module\
 ![Images verification](https://github.com/user-attachments/assets/2ca23625-454d-4ed1-8e04-2444f979a8ab)\
 **Step 6: Check the shape of single image**\
             image_dr = os.path.join(image_directory,random_images[0])
-            image_dr
+            image_dr\
 **Step 7: Download YOLOv8 and run Inference on a random image**\
                     from ultralytics import YOLO\
              Write scrite in cloab\
