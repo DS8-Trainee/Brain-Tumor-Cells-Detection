@@ -89,15 +89,15 @@ import zipfile # This line imports the zipfile module\
             Model has been given epoch 16, batch size=-1, optimiser=auto\
             use following script\
 Result_Final_model = yolo_model.train(data="/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8/data.yaml",epochs = 16,batch =-1, optimizer = 'auto')\
-***Check Model Accuracy***
+***Check Model Accuracy***\
 Few metrics are\
             confusion matrix\
             F1 curve\
             Precision and confidence score\
             Recall and confidence score\
-            ![Recall for model](\
-            ![Receision]()
-            ![F1]()
+            ![Recall for model](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/Recall-Confidence%20Curve.png)\
+            ![Peceision](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/Precision%20Confidence%20Curve.png)
+            ![F1](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/F1-Confidence%20Curve.png)
             The results of the model are saved in form of csv file That can be visualize as\
              **Firstly reading dataframe**\
             - Result_Train_model = pd.read_csv('/content/runs/detect/train/results.csv')\
@@ -138,12 +138,12 @@ plt.subplots_adjust(top=0.8)\
 plt.tight_layout()\
 plt.show()\
 This will produce following results\
-![Results]()\
-**Step 9: Uploading best model**
+![Results](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/Training%20metrics%20and%20loss.png)\
+**Step 9: Uploading best model**\
 Yolo automatically stores best performing model in train/weights/best.pt. So, utilizing that model evaluation on valid set was done using following script. and results may e printed\
 Valid_model = YOLO('/content/runs/detect/train/weights/best.pt')\
 **To save this model download this model **\
-**Evaluating the model on the validset**
+**Evaluating the model on the validset**\
 ***Normalization function***
 def normalize_image(image):
     return image / 255.0
@@ -212,7 +212,7 @@ precision(B):  0.9323591286180969\
 metrics/recall(B):  0.9189348599890331\
 metrics/mAP50(B):  0.9668363585639872\
 metrics/mAP50-95(B):  0.7805349340372879\
-**Step 10: Inference on unseen data**
+**Step 10: Inference on unseen data**\
 ***Normalization function***
 def normalize_image(image):
     return image / 255.0
@@ -269,7 +269,7 @@ if len(image_files) > 0:
 
     plt.tight_layout()
     plt.show()
-    ![Test set Images](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
+    ![Test set Images](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/Test%20set%20Inference.png)
     **Step 17**
 **Step-11: Deployment of app on Hugging face**\
    -  Go to https://huggingface.co/
