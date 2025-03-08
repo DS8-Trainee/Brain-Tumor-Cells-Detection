@@ -79,7 +79,188 @@ Few metrics are\
             F1 curve\
             Precision and confidence score\
             Recall and confidence score\
-            ![Recall for model](
+            ![Recall for model](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
+**Step 13** The results of the model are saved in form of csv file That can be visualize as\
+Firstly reading dataframe\
+Result_Train_model12 = pd.read_csv('/content/runs/detect/train/results.csv')\
+Afterwards displaying only 10 last rows of that\
+Result_Train_model12.tail(10)\
+Also wrinting following script\
+ Read the results.csv file as a pandas dataframe\
+Result_Train_model.columns = Result_Train_model.columns.str.strip()
+
+# Create subplots
+fig, axs = plt.subplots(nrows=5, ncols=2, figsize=(15, 15))\
+
+# Plot the columns using seaborn
+sns.lineplot(x='epoch', y='train/box_loss', data=Result_Train_model, ax=axs[0,0])\
+sns.lineplot(x='epoch', y='train/cls_loss', data=Result_Train_model, ax=axs[0,1])\
+sns.lineplot(x='epoch', y='train/dfl_loss', data=Result_Train_model, ax=axs[1,0])\
+sns.lineplot(x='epoch', y='metrics/precision(B)', data=Result_Train_model, ax=axs[1,1])\
+sns.lineplot(x='epoch', y='metrics/recall(B)', data=Result_Train_model, ax=axs[2,0])\
+sns.lineplot(x='epoch', y='metrics/mAP50(B)', data=Result_Train_model, ax=axs[2,1])\
+sns.lineplot(x='epoch', y='metrics/mAP50-95(B)', data=Result_Train_model, ax=axs[3,0])\
+sns.lineplot(x='epoch', y='val/box_loss', data=Result_Train_model, ax=axs[3,1])\
+sns.lineplot(x='epoch', y='val/cls_loss', data=Result_Train_model, ax=axs[4,0])\
+sns.lineplot(x='epoch', y='val/dfl_loss', data=Result_Train_model, ax=axs[4,1])\
+
+# Set titles and axis labels for each subplot
+axs[0,0].set(title='Train Box Loss')\
+axs[0,1].set(title='Train Class Loss')\
+axs[1,0].set(title='Train DFL Loss')\
+axs[1,1].set(title='Metrics Precision (B)')\
+axs[2,0].set(title='Metrics Recall (B)')\
+axs[2,1].set(title='Metrics mAP50 (B)')\
+axs[3,0].set(title='Metrics mAP50-95 (B)')\
+axs[3,1].set(title='Validation Box Loss')\
+axs[4,0].set(title='Validation Class Loss')\
+axs[4,1].set(title='Validation DFL Loss')\
+
+
+plt.suptitle('Training Metrics and Loss', fontsize=24)\
+plt.subplots_adjust(top=0.8)\
+plt.tight_layout()\
+plt.show()\
+This will produce following results\
+![Results]()
+**Step 13**
+Yolo automatically stores best performing model in train/weights/best.pt. So, utilizing that model evaluation on valid set was done using following script. and results may e printed\
+# Loading the best performing model\
+Valid_model = YOLO('/content/runs/detect/train/weights/best.pt')\
+
+# Evaluating the model on the validset\
+metrics = Valid_model.val(split = 'val')\
+
+# final results\
+print("precision(B): ", metrics.results_dict["metrics/precision(B)"])\
+print("metrics/recall(B): ", metrics.results_dict["metrics/recall(B)"])\
+print("metrics/mAP50(B): ", metrics.results_dict["metrics/mAP50(B)"])\
+print("metrics/mAP50-95(B): ", metrics.results_dict["metrics/mAP50-95(B)"])\
+Model produce following results\
+Results saved to runs/detect/val\
+precision(B):  0.9323591286180969\
+metrics/recall(B):  0.9189348599890331\
+metrics/mAP50(B):  0.9668363585639872\
+metrics/mAP50-95(B):  0.7805349340372879\
+**Step 14**
+# Normalization function\
+def normalize_image(image):\
+    return image / 255.0\
+
+# Image resizing function\
+def resize_image(image, size=(640, 640)):\
+    return cv2.resize(image, size)\
+
+# Path to test images\
+dataset_path = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8'  # Place your dataset path here\
+valid_images_path = os.path.join(dataset_path, 'valid', 'images')\
+
+# List of all jpg images in the directory\
+image_files = [file for file in os.listdir(valid_images_path) if file.endswith('.jpg')]\
+
+# Check if there are images in the directory\
+if len(image_files) > 0:\
+    # Select 9 images at equal intervals\
+    num_images = len(image_files)\
+    step_size = max(1, num_images // 9)  # Ensure the interval is at least 1\
+    selected_images = [image_files[i] for i in range(0, num_images, step_size)]\
+
+    # Prepare subplots\
+    fig, axes = plt.subplots(3, 3, figsize=(20, 21))\
+    fig.suptitle('val Set Inferences', fontsize=24)\
+
+    for i, ax in enumerate(axes.flatten()):\
+        if i < len(selected_images):\
+            image_path = os.path.join(valid_images_path, selected_images[i])\
+
+            # Load image\
+            image = cv2.imread(image_path)\
+
+            # Check if the image is loaded correctly\
+            if image is not None:\
+                # Resize image\
+                resized_image = resize_image(image, size=(640, 640))\
+                # Normalize image\
+                normalized_image = normalize_image(resized_image)\
+
+                # Convert the normalized image to uint8 data type\
+                normalized_image_uint8 = (normalized_image * 255).astype(np.uint8)\
+
+                # Predict with the model\
+                results = Valid_model.predict(source=normalized_image_uint8, imgsz=640, conf=0.5)\
+
+                # Plot image with labels\
+                annotated_image = results[0].plot(line_width=1)\
+                annotated_image_rgb = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)\
+                ax.imshow(annotated_image_rgb)\
+            else:\
+                print(f"Failed to load image {image_path}")\
+        ax.axis('off')\
+
+    plt.tight_layout()\
+    plt.show()\
+    ![Valid set Images]()
+
+    **Step 14**
+# Normalization function\
+def normalize_image(image):\
+    return image / 255.0\
+
+# Image resizing function\
+def resize_image(image, size=(640, 640)):\
+    return cv2.resize(image, size)\
+
+# Path to test images\
+dataset_path = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8'  # Place your dataset path here\
+valid_images_path = os.path.join(dataset_path, 'test', 'images')\
+
+# List of all jpg images in the directory\
+image_files = [file for file in os.listdir(valid_images_path) if file.endswith('.jpg')]\
+
+# Check if there are images in the directory\
+if len(image_files) > 0:\
+    # Select 9 images at equal intervals\
+    num_images = len(image_files)\
+    step_size = max(1, num_images // 9)  # Ensure the interval is at least 1\
+    selected_images = [image_files[i] for i in range(0, num_images, step_size)]\
+
+    # Prepare subplots\
+    fig, axes = plt.subplots(3, 3, figsize=(20, 21))\
+    fig.suptitle('Test Set Inferences', fontsize=24)\
+
+    for i, ax in enumerate(axes.flatten()):\
+        if i < len(selected_images):\
+            image_path = os.path.join(valid_images_path, selected_images[i])\
+
+            # Load image\
+            image = cv2.imread(image_path)\
+
+            # Check if the image is loaded correctly\
+            if image is not None:\
+                # Resize image\
+                resized_image = resize_image(image, size=(640, 640))\
+                # Normalize image\
+                normalized_image = normalize_image(resized_image)\
+
+                # Convert the normalized image to uint8 data type\
+                normalized_image_uint8 = (normalized_image * 255).astype(np.uint8)\
+
+                # Predict with the model\
+                results = Valid_model.predict(source=normalized_image_uint8, imgsz=640, conf=0.5)\
+
+                # Plot image with labels\
+                annotated_image = results[0].plot(line_width=1)\
+                annotated_image_rgb = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)\
+                ax.imshow(annotated_image_rgb)\
+            else:\
+                print(f"Failed to load image {image_path}")\
+        ax.axis('off')\
+
+    plt.tight_layout()\
+    plt.show()\
+    ![Test set Images]()
+    
+
 
 
 
