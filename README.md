@@ -125,13 +125,13 @@ This will produce following results\
 ![Results]()\
 **Step 14**
 Yolo automatically stores best performing model in train/weights/best.pt. So, utilizing that model evaluation on valid set was done using following script. and results may e printed\
-# Loading the best performing model\
+# Loading the best performing model
 Valid_model = YOLO('/content/runs/detect/train/weights/best.pt')\
 
-# Evaluating the model on the validset\
-metrics = Valid_model.val(split = 'val')\
+# Evaluating the model on the validset
+metrics = Valid_model.val(split = 'val')
 
-# final results\
+# final results
 print("precision(B): ", metrics.results_dict["metrics/precision(B)"])\
 print("metrics/recall(B): ", metrics.results_dict["metrics/recall(B)"])\
 print("metrics/mAP50(B): ", metrics.results_dict["metrics/mAP50(B)"])\
@@ -144,120 +144,120 @@ metrics/mAP50(B):  0.9668363585639872\
 metrics/mAP50-95(B):  0.7805349340372879\
 **Step 15**
 # Normalization function
-def normalize_image(image):\
-    return image / 255.0\
+def normalize_image(image):
+    return image / 255.0
 
 # Image resizing function
-def resize_image(image, size=(640, 640)):\
-    return cv2.resize(image, size)\
+def resize_image(image, size=(640, 640)):
+    return cv2.resize(image, size)
 
 # Path to test images
-dataset_path = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8'  # Place your dataset path here\
-valid_images_path = os.path.join(dataset_path, 'valid', 'images')\
+dataset_path = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8'  # Place your dataset path here
+valid_images_path = os.path.join(dataset_path, 'valid', 'images')
 
 # List of all jpg images in the directory
-image_files = [file for file in os.listdir(valid_images_path) if file.endswith('.jpg')]\
+image_files = [file for file in os.listdir(valid_images_path) if file.endswith('.jpg')]
 
 # Check if there are images in the directory
-if len(image_files) > 0:\
-    # Select 9 images at equal intervals\
-    num_images = len(image_files)\
-    step_size = max(1, num_images // 9)  # Ensure the interval is at least 1\
-    selected_images = [image_files[i] for i in range(0, num_images, step_size)]\
+if len(image_files) > 0:
+    # Select 9 images at equal intervals
+    num_images = len(image_files)
+    step_size = max(1, num_images // 9)  # Ensure the interval is at least 1
+    selected_images = [image_files[i] for i in range(0, num_images, step_size)]
 
-    # Prepare subplots\
-    fig, axes = plt.subplots(3, 3, figsize=(20, 21))\
-    fig.suptitle('val Set Inferences', fontsize=24)\
+    # Prepare subplots
+    fig, axes = plt.subplots(3, 3, figsize=(20, 21))
+    fig.suptitle('val Set Inferences', fontsize=24)
 
-    for i, ax in enumerate(axes.flatten()):\
-        if i < len(selected_images):\
-            image_path = os.path.join(valid_images_path, selected_images[i])\
+    for i, ax in enumerate(axes.flatten()):
+        if i < len(selected_images):
+            image_path = os.path.join(valid_images_path, selected_images[i])
 
-            # Load image\
-            image = cv2.imread(image_path)\
+            # Load image
+            image = cv2.imread(image_path)
 
-            # Check if the image is loaded correctly\
-            if image is not None:\
-                # Resize image\
-                resized_image = resize_image(image, size=(640, 640))\
-                # Normalize image\
-                normalized_image = normalize_image(resized_image)\
+            # Check if the image is loaded correctly
+            if image is not None:
+                # Resize image
+                resized_image = resize_image(image, size=(640, 640))
+                # Normalize image
+                normalized_image = normalize_image(resized_image)
 
-                # Convert the normalized image to uint8 data type\
-                normalized_image_uint8 = (normalized_image * 255).astype(np.uint8)\
+                # Convert the normalized image to uint8 data type
+                normalized_image_uint8 = (normalized_image * 255).astype(np.uint8)
 
-                # Predict with the model\
-                results = Valid_model.predict(source=normalized_image_uint8, imgsz=640, conf=0.5)\
+                # Predict with the model
+                results = Valid_model.predict(source=normalized_image_uint8, imgsz=640, conf=0.5)
 
-                # Plot image with labels\
-                annotated_image = results[0].plot(line_width=1)\
-                annotated_image_rgb = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)\
-                ax.imshow(annotated_image_rgb)\
-            else:\
-                print(f"Failed to load image {image_path}")\
-        ax.axis('off')\
+                # Plot image with labels
+                annotated_image = results[0].plot(line_width=1)
+                annotated_image_rgb = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
+                ax.imshow(annotated_image_rgb)
+            else:
+                print(f"Failed to load image {image_path}")
+        ax.axis('off')
 
-    plt.tight_layout()\
-    plt.show()\
+    plt.tight_layout()
+    plt.show()
     ![Valid set Images]()
 
-    **Step 16**
+**Step 16**
 # Normalization function
-def normalize_image(image):\
-    return image / 255.0\
+def normalize_image(image):
+    return image / 255.0
 
 # Image resizing function
-def resize_image(image, size=(640, 640)):\
-    return cv2.resize(image, size)\
+def resize_image(image, size=(640, 640)):
+    return cv2.resize(image, size)
 
 # Path to test images
-dataset_path = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8'  # Place your dataset path here\
-valid_images_path = os.path.join(dataset_path, 'test', 'images')\
+dataset_path = '/content/drive/MyDrive/Roboflow_Brain_Tumor/brain tumor.v1i.yolov8'  # Place your dataset path here
+valid_images_path = os.path.join(dataset_path, 'test', 'images')
 
 # List of all jpg images in the directory
-image_files = [file for file in os.listdir(valid_images_path) if file.endswith('.jpg')]\
+image_files = [file for file in os.listdir(valid_images_path) if file.endswith('.jpg')]
 
 # Check if there are images in the directory
-if len(image_files) > 0:\
-    # Select 9 images at equal intervals\
-    num_images = len(image_files)\
-    step_size = max(1, num_images // 9)  # Ensure the interval is at least 1\
-    selected_images = [image_files[i] for i in range(0, num_images, step_size)]\
+if len(image_files) > 0:
+    # Select 9 images at equal intervals
+    num_images = len(image_files)
+    step_size = max(1, num_images // 9)  # Ensure the interval is at least 1
+    selected_images = [image_files[i] for i in range(0, num_images, step_size)]
 
-    # Prepare subplots\
-    fig, axes = plt.subplots(3, 3, figsize=(20, 21))\
-    fig.suptitle('Test Set Inferences', fontsize=24)\
+    # Prepare subplots
+    fig, axes = plt.subplots(3, 3, figsize=(20, 21))
+    fig.suptitle('Test Set Inferences', fontsize=24)
 
-    for i, ax in enumerate(axes.flatten()):\
-        if i < len(selected_images):\
-            image_path = os.path.join(valid_images_path, selected_images[i])\
+    for i, ax in enumerate(axes.flatten()):
+        if i < len(selected_images):
+            image_path = os.path.join(valid_images_path, selected_images[i])
 
-            # Load image\
-            image = cv2.imread(image_path)\
+            # Load image
+            image = cv2.imread(image_path)
 
-            # Check if the image is loaded correctly\
-            if image is not None:\
-                # Resize image\
-                resized_image = resize_image(image, size=(640, 640))\
-                # Normalize image\
-                normalized_image = normalize_image(resized_image)\
+            # Check if the image is loaded correctly
+            if image is not None:
+                # Resize image
+                resized_image = resize_image(image, size=(640, 640))
+                # Normalize image
+                normalized_image = normalize_image(resized_image)
 
-                # Convert the normalized image to uint8 data type\
-                normalized_image_uint8 = (normalized_image * 255).astype(np.uint8)\
+                # Convert the normalized image to uint8 data type
+                normalized_image_uint8 = (normalized_image * 255).astype(np.uint8)
 
-                # Predict with the model\
-                results = Valid_model.predict(source=normalized_image_uint8, imgsz=640, conf=0.5)\
+                # Predict with the model
+                results = Valid_model.predict(source=normalized_image_uint8, imgsz=640, conf=0.5)
 
-                # Plot image with labels\
-                annotated_image = results[0].plot(line_width=1)\
-                annotated_image_rgb = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)\
-                ax.imshow(annotated_image_rgb)\
-            else:\
-                print(f"Failed to load image {image_path}")\
-        ax.axis('off')\
+                # Plot image with labels
+                annotated_image = results[0].plot(line_width=1)
+                annotated_image_rgb = cv2.cvtColor(annotated_image, cv2.COLOR_BGR2RGB)
+                ax.imshow(annotated_image_rgb)
+            else:
+                print(f"Failed to load image {image_path}")
+        ax.axis('off')
 
-    plt.tight_layout()\
-    plt.show()\
+    plt.tight_layout()
+    plt.show()
     ![Test set Images](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/download.png)
     
 
