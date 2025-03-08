@@ -1,6 +1,7 @@
 # Brain-Tumor-Cells-Detection
 This project will detect tumor in brain MRI scans to help assist the radiologist/expert in detecting tumor accurately and within less time.\
 **1st Step:** The dataset has been taken from Roboflow (having one class:tumor)\
+[![Roboflow](https://path-to-roboflow-icon.png)](https://roboflow.com)
             Go to Roboflow Universe or follow the link\
             (Link:https://universe.roboflow.com/zaky-indra-w86c4/brain-tumor-gsh0d/dataset/1).
               Click the download dataset.The dataset will be downloaded in downloads.\
@@ -262,9 +263,10 @@ if len(image_files) > 0:
     **Step 17**
 **Step-17 Deployment of app on Hugging face.**
     Go to https://huggingface.co/
+    [![Hugging Face](https://path-to-hugging-face-icon.png)](https://huggingface.co)
     Go to Spaces/
     Create new space/
-** 1-Add requirements.txt file/**
+**1-Add requirements.txt file**
     Add following libraries there\
             pandas\
             numpy\
@@ -280,7 +282,8 @@ if len(image_files) > 0:
             torchvision\
             torch\
             opencv-python-headless==4.8.0.74\
-** 2- Add app.py file**
+            
+**2- Add app.py file**
     To create user interface in gradio write following script in app.py file\
     import os\
 os.system("git lfs pull")\
@@ -407,7 +410,7 @@ Now go to app will build and restart and take few moments.
 The interface would be like this 
 ![image](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/image.png)
 **Methd of Use**
-            The model has been deployed on huggingface space "stmuntahaa/Brain_Tumor_Detection".
+            The model has been deployed on huggingface space [stmuntahaa/Brain_Tumor_Detection](https://huggingface.co/stmuntahaa).
             1-Deployed app's UI asks user to upload MRI scan and patient particulars (Patient name, Gender, Age), and prompts to click 
             the Submit button.
             2-The app produces results on UI (Output 0) along with a pdf report, that is downloadable. The report contains the necessary information on the patient's particulars and the result of the MRI scan. The pdf report is downloaded to local Download folder of your device.
