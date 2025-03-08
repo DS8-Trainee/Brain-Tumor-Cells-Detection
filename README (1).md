@@ -421,12 +421,14 @@ Now go to app will build and restart and take few moments.
 The interface would be like this\
 ![image](https://github.com/DS8-Trainee/Brain-Tumor-Cells-Detection/blob/main/image.png)\
 # Ste:12: Method of Use
-            The model has been deployed on huggingface space.\
-            Go to (https://huggingface.co/stmuntahaa)\
+The model has been deployed on huggingface space.\
+Go to (https://huggingface.co/stmuntahaa)\
             \
-            [stmuntahaa/Brain_Tumor_Detection](https://huggingface.co/stmuntahaa).\
+ [stmuntahaa/Brain_Tumor_Detection](https://huggingface.co/stmuntahaa).\
+ *1*-Deployed app's UI asks user to upload MRI scan and patient particulars (Patient name, Gender, Age), and prompts to click 
+the Submit button.\
+*2*-The app produces results on UI (Output 0) along with a pdf report, that is downloadable. The report contains the                       necessary information on the patient's particulars and the result of the MRI scan.\
+The pdf report is downloaded to local Download folder of your device.
             
-            *1*-Deployed app's UI asks user to upload MRI scan and patient particulars (Patient name, Gender, Age), and prompts to click 
-            the Submit button.\
-            *2*-The app produces results on UI (Output 0) along with a pdf report, that is downloadable. The report contains the                       necessary information on the patient's particulars and the result of the MRI scan.\
-            The pdf report is downloaded to local Download folder of your device.
+                        
+           
