@@ -19,7 +19,7 @@ The dataset has been taken from Roboflow \
                         - Noise: Up to 1.49% of pixels\
                         - Bounding Box: Flip: Horizontal\
            Click the download dataset.The dataset will be downloaded in downloads.\
-**2nd Step: Setting the Environment**
+**2nd Step: Setting the Environment**\
                         - 1-Go to colab (https://colab.research.google.com/#create=true)\
                         - 2- Upload data set to google drive \
                         - 3- Import dataset mount drive using \
