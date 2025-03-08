@@ -1,0 +1,14 @@
+pandas
+numpy
+gradio 
+ultralytics
+YOLO
+ray==2.32.0
+reportlab
+Pillow==9.5.0
+Ultralytics
+joblib
+reportlab
+torchvision
+torch
+opencv-python-headless==4.8.0.74
